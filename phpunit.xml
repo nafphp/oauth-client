@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/bootstrap.php" colors="true" failOnRisky="true" failOnWarning="true" cacheResult="false">
-    <testsuites><testsuite name="NixPHP OAuth Client"><directory>tests/Unit</directory></testsuite></testsuites>
+<phpunit bootstrap="tests/bootstrap.php" colors="true" failOnRisky="true" failOnWarning="true"
+         failOnDeprecation="true" cacheResult="false">
+    <testsuites><testsuite name="NAF OAuth Client"><directory>tests/Unit</directory></testsuite></testsuites>
     <source><include><directory>src</directory></include></source>
 </phpunit>
