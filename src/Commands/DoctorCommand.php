@@ -127,7 +127,7 @@ class DoctorCommand extends AbstractCommand
             app()->container()->get(AccountLinkStoreInterface::class)->find('https://probe.invalid', 'probe');
             $this->line($output, 'oauth_identities', 'present', true);
         } catch (Throwable $e) {
-            $this->line($output, 'oauth_identities', 'missing — run "nix db:migrate up"', false);
+            $this->line($output, 'oauth_identities', 'missing — run "naf db:migrate up"', false);
         }
     }
 
@@ -173,7 +173,7 @@ class DoctorCommand extends AbstractCommand
             app()->container()->get(TokenStoreInterface::class)->find('https://probe.invalid', 'probe');
             $this->line($output, 'oauth_provider_tokens', 'present', true);
         } catch (Throwable $e) {
-            $this->line($output, 'oauth_provider_tokens', 'missing — run "nix db:migrate up"', false);
+            $this->line($output, 'oauth_provider_tokens', 'missing — run "naf db:migrate up"', false);
         }
     }
 

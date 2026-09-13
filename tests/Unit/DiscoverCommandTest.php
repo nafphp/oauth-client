@@ -8,7 +8,7 @@ use Naf\OAuth\Client\Commands\DiscoverCommand;
 use Tests\CommandTestCase;
 
 /**
- * What "nix oauth:discover" tells somebody setting a provider up.
+ * What "naf oauth:discover" tells somebody setting a provider up.
  *
  * It exists to answer two questions before anybody tries to sign in: does this
  * configuration resolve, and which callback URL has to be registered. Both

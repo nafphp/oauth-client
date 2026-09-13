@@ -62,7 +62,7 @@ return [
              * which means this key does not belong in the database, and losing
              * it costs everybody a new consent screen.
              *
-             * "nix oauth:doctor" says how to generate one; it deliberately
+             * "naf oauth:doctor" says how to generate one; it deliberately
              * does not print the key itself.
              */
             'key' => null,

@@ -12,7 +12,7 @@ use Tests\Fixtures\User;
 use function Naf\app;
 
 /**
- * What "nix oauth:doctor" says about a setup, and what it refuses to say.
+ * What "naf oauth:doctor" says about a setup, and what it refuses to say.
  *
  * Its whole value is that somebody can act on the report without reading the
  * code, which makes a misleading line worse than a missing one: being told to
