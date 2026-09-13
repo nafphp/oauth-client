@@ -1,0 +1,12 @@
+/vendor/
+/composer.lock
+/composer.local.*
+/.composer-cache/
+/.phpunit.cache/
+/.phpunit.result.cache
+/.test-sessions/
+/logs/
+/*.log
+.DS_Store
+.idea/
+/.phpstan-cache/

@@ -1,0 +1,7 @@
+parameters:
+  level: 6
+  paths:
+    - src
+    - bootstrap.php
+  treatPhpDocTypesAsCertain: false
+  tmpDir: .phpstan-cache

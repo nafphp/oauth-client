@@ -1,0 +1,101 @@
+{
+  "name": "nixphp/oauth-client",
+  "description": "Sign in with external OAuth2 and OpenID Connect providers, keeping your own user model.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "type": "nixphp-plugin",
+  "authors": [
+    {
+      "name": "Flo Knapp",
+      "email": "office@florianknapp.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NixPHP\\OAuth\\Client\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../auth",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../client",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../session",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../database",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../cli",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../view",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "require": {
+    "php": ">=8.3",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "nixphp/framework": "^0.1.0",
+    "nixphp/auth": "dev-main",
+    "nyholm/psr7": "^1.8",
+    "psr/http-client": "^1.0",
+    "psr/http-message": "^2.0",
+    "firebase/php-jwt": "^7.1",
+    "nixphp/session": "dev-main"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.1",
+    "phpstan/phpstan": "^2.1",
+    "nixphp/client": "dev-main",
+    "nixphp/database": "dev-main",
+    "nixphp/cli": "dev-main",
+    "nixphp/view": "dev-main"
+  },
+  "suggest": {
+    "nixphp/client": "A PSR-18 client for the token exchange, unless you bind your own.",
+    "nixphp/database": "Ship the account-link table as a migration.",
+    "nixphp/cli": "Resolve provider endpoints once with oauth:discover.",
+    "nixphp/view": "Override the shipped login button by shadowing its view.",
+    "ext-sodium": "Encrypt stored provider tokens, when oauth:tokens:store is on."
+  },
+  "scripts": {
+    "test": "phpunit --colors=always",
+    "analyse": "phpstan analyse --memory-limit=256M"
+  }
+}
