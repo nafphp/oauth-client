@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\Auth\Auth;
-use NixPHP\OAuth\Client\Account\Accounts;
-use NixPHP\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, OAuth, UserInfo};
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
-use NixPHP\OAuth\Client\Token\ProviderToken;
-use NixPHP\OAuth\Client\Token\Tokens;
+use Naf\Auth\Auth;
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, OAuth, UserInfo};
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Token\Tokens;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\{Account, AccountSource, ArrayTransactions, FakeHttp, MemoryLinks, MemoryTokens};
 
@@ -41,7 +41,7 @@ final class TokensTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->cache = sys_get_temp_dir() . '/nixphp-oauth-' . bin2hex(random_bytes(6));
+        $this->cache = sys_get_temp_dir() . '/naf-oauth-' . bin2hex(random_bytes(6));
         $this->http  = new FakeHttp();
         $this->http->on('GET', self::DISCOVERY, [
             'issuer'                 => self::ISSUER,

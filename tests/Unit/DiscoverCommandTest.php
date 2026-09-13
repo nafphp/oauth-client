@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Commands\DiscoverCommand;
+use Naf\OAuth\Client\Commands\DiscoverCommand;
 use Tests\CommandTestCase;
 
 /**

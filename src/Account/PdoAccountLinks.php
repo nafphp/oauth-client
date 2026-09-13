@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Account;
+namespace Naf\OAuth\Client\Account;
 
 use InvalidArgumentException;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
 use PDO;
 use PDOException;
 use PDOStatement;

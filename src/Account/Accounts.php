@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Account;
+namespace Naf\OAuth\Client\Account;
 
 use Closure;
-use NixPHP\Auth\Auth;
-use NixPHP\Auth\Identity\IdentityInterface;
-use NixPHP\OAuth\Client\Core\Callback;
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Exception\OAuthException;
+use Naf\Auth\Auth;
+use Naf\Auth\Identity\IdentityInterface;
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Exception\OAuthException;
 
 /**
  * The one decision this plugin will not make for you, with everything around it
@@ -29,7 +29,7 @@ use NixPHP\OAuth\Client\Exception\OAuthException;
  */
 final class Accounts
 {
-    /** @param (Closure(\NixPHP\OAuth\Client\Identity\ExternalIdentity): ?IdentityInterface)|null $create */
+    /** @param (Closure(\Naf\OAuth\Client\Identity\ExternalIdentity): ?IdentityInterface)|null $create */
     public function __construct(
         private readonly AccountLinkStoreInterface $links,
         private readonly Auth $auth,
@@ -160,7 +160,7 @@ final class Accounts
     }
 
     /**
-     * Which nixphp/auth source owns the accounts external logins map onto.
+     * Which naf/auth source owns the accounts external logins map onto.
      *
      * Asked of the registry itself rather than of the configuration it was
      * usually filled from — a source added imperatively in a bootstrap is just as
@@ -179,7 +179,7 @@ final class Accounts
         }
 
         throw new ConfigurationException($registered === []
-            ? 'No account source is registered with nixphp/auth. Register one before signing anybody in.'
+            ? 'No account source is registered with naf/auth. Register one before signing anybody in.'
             : 'Several account sources are registered (' . implode(', ', $registered) . '). '
               . 'Name the one that owns external logins in oauth:accounts:provider.');
     }

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
-use NixPHP\OAuth\Client\Provider\UserInfoSource;
-use NixPHP\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Provider\UserInfoSource;
+use Naf\OAuth\Client\Token\ProviderToken;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use function NixPHP\app;
+use function Naf\app;
 
 /**
  * One provider's login, from the first redirect to the verified identity.

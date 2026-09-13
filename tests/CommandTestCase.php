@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use NixPHP\Auth\Auth;
-use NixPHP\CLI\Core\{AbstractCommand, Input, Output};
-use NixPHP\Core\Config;
-use NixPHP\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
-use NixPHP\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface, UserInfo};
-use NixPHP\OAuth\Client\Migrations\{OAuthIdentitiesMigration, OAuthProviderTokensMigration};
-use NixPHP\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
+use Naf\Auth\Auth;
+use Naf\CLI\Core\{AbstractCommand, Input, Output};
+use Naf\Core\Config;
+use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
+use Naf\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface, UserInfo};
+use Naf\OAuth\Client\Migrations\{OAuthIdentitiesMigration, OAuthProviderTokensMigration};
+use Naf\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
 use PDO;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Tests\Fixtures\FakeHttp;
 use Tests\Fixtures\Signer;
-use function NixPHP\app;
+use function Naf\app;
 
 /**
  * Runs a command the way the console runs it.
@@ -53,7 +53,7 @@ abstract class CommandTestCase extends TestCase
             define('BASE_PATH', dirname(__DIR__) . '/tests/Fixtures');
         }
 
-        $this->cache = sys_get_temp_dir() . '/nixphp-oauth-cmd-' . bin2hex(random_bytes(6));
+        $this->cache = sys_get_temp_dir() . '/naf-oauth-cmd-' . bin2hex(random_bytes(6));
 
         $this->reset();
     }
@@ -132,7 +132,7 @@ abstract class CommandTestCase extends TestCase
     {
         // Accounts asks the container for Auth, which the auth plugin registers in
         // its own bootstrap. Both guard their factories, so re-running is a no-op.
-        require dirname(__DIR__) . '/vendor/nixphp/auth/bootstrap.php';
+        require dirname(__DIR__) . '/vendor/naf/auth/bootstrap.php';
         require dirname(__DIR__) . '/bootstrap.php';
     }
 

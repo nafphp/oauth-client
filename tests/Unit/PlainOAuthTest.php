@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Core\{Flow, IdToken, Metadata, UserInfo};
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Core\{Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\{ArrayTransactions, FakeHttp};
 
@@ -25,7 +25,7 @@ final class PlainOAuthTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->cache        = sys_get_temp_dir() . '/nixphp-oauth-plain-' . bin2hex(random_bytes(6));
+        $this->cache        = sys_get_temp_dir() . '/naf-oauth-plain-' . bin2hex(random_bytes(6));
         $this->http         = new FakeHttp();
         $this->transactions = new ArrayTransactions();
 
@@ -272,7 +272,7 @@ final class PlainOAuthTest extends TestCase
     }
 
     /** @param array<string, mixed> $profile */
-    private function finish(array $profile): \NixPHP\OAuth\Client\Core\Callback
+    private function finish(array $profile): \Naf\OAuth\Client\Core\Callback
     {
         $started = $this->start();
 

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\Auth\Auth;
-use NixPHP\CLI\Support\CommandRegistry;
-use NixPHP\Core\Config;
-use NixPHP\Database\Support\MigrationRegistry;
-use NixPHP\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
-use NixPHP\OAuth\Client\Commands\DiscoverCommand;
-use NixPHP\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface};
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
+use Naf\Auth\Auth;
+use Naf\CLI\Support\CommandRegistry;
+use Naf\Core\Config;
+use Naf\Database\Support\MigrationRegistry;
+use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
+use Naf\OAuth\Client\Commands\DiscoverCommand;
+use Naf\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface};
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
 use PDO;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Tests\Fixtures\{ArrayTransactions, FakeHttp};
-use function NixPHP\app;
-use function NixPHP\OAuth\Client\oauth;
+use function Naf\app;
+use function Naf\OAuth\Client\oauth;
 
 /** What bootstrap.php registers, and what it leaves to the application. */
 final class WiringTest extends TestCase
@@ -240,13 +240,13 @@ final class WiringTest extends TestCase
         $this->configure([]);
         $this->boot();
 
-        self::assertTrue(app()->hasPlugin('nixphp/database'), 'precondition for this test');
+        self::assertTrue(app()->hasPlugin('naf/database'), 'precondition for this test');
         self::assertContains(
             realpath(dirname(__DIR__, 2) . '/src/Migrations'),
             array_map(realpath(...), MigrationRegistry::getPaths()),
         );
 
-        self::assertTrue(app()->hasPlugin('nixphp/cli'), 'precondition for this test');
+        self::assertTrue(app()->hasPlugin('naf/cli'), 'precondition for this test');
         self::assertSame(
             DiscoverCommand::class,
             app()->container()->get(CommandRegistry::class)->get(DiscoverCommand::NAME),
@@ -272,7 +272,7 @@ final class WiringTest extends TestCase
     {
         // Accounts asks the container for Auth, which the auth plugin registers in
         // its own bootstrap. Both guard their factories, so re-running is a no-op.
-        require dirname(__DIR__, 2) . '/vendor/nixphp/auth/bootstrap.php';
+        require dirname(__DIR__, 2) . '/vendor/naf/auth/bootstrap.php';
         require dirname(__DIR__, 2) . '/bootstrap.php';
     }
 

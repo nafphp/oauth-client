@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
-use NixPHP\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Exception\OAuthException;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;

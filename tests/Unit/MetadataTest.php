@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Core\Metadata;
-use NixPHP\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Exception\OAuthException;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\FakeHttp;
 
@@ -20,7 +20,7 @@ final class MetadataTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->cache    = sys_get_temp_dir() . '/nixphp-oauth-meta-' . bin2hex(random_bytes(6));
+        $this->cache    = sys_get_temp_dir() . '/naf-oauth-meta-' . bin2hex(random_bytes(6));
         $this->http     = new FakeHttp();
         $this->metadata = new Metadata($this->http, $this->cache);
     }

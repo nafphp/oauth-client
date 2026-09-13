@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\Session\Core\Session;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\Session\Core\Session;
 
 /**
- * Pending logins, kept in the nixphp/session session.
+ * Pending logins, kept in the naf/session session.
  *
  * The session is what binds a login to one browser: without it, a `state` proves
  * nothing and the whole exchange is decoration. So a missing session aborts the
@@ -16,7 +16,7 @@ use NixPHP\Session\Core\Session;
  *
  * **A known limit.** Taking an entry is read-modify-write, and what makes that
  * indivisible is the session backend holding a lock for the request. PHP's own
- * file handler does; nixphp/session's database handler does not. Two callbacks
+ * file handler does; naf/session's database handler does not. Two callbacks
  * arriving for the same state in the same instant could therefore both find it
  * there. Every check after that still applies — the code is single-use at the
  * provider, and the ID token still has to verify — so this is a narrowing of the
@@ -39,7 +39,7 @@ final class SessionTransactions implements TransactionStoreInterface
         if (session_status() !== PHP_SESSION_ACTIVE) {
             throw OAuthException::of(
                 'no_session',
-                'A browser login needs an active session. Install nixphp/session and let it start.'
+                'A browser login needs an active session. Install naf/session and let it start.'
             );
         }
 

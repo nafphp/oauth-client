@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
 use Closure;
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
 
 /**
  * The configured providers, built when somebody actually uses one.

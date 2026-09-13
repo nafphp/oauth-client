@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\Auth\Auth;
-use NixPHP\OAuth\Client\Account\{Accounts, PdoAccountLinks};
-use NixPHP\OAuth\Client\Core\Callback;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
-use NixPHP\OAuth\Client\Migrations\OAuthIdentitiesMigration;
+use Naf\Auth\Auth;
+use Naf\OAuth\Client\Account\{Accounts, PdoAccountLinks};
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Migrations\OAuthIdentitiesMigration;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;

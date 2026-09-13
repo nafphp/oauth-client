@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Commands;
+namespace Naf\OAuth\Client\Commands;
 
-use NixPHP\CLI\Core\AbstractCommand;
-use NixPHP\CLI\Core\Input;
-use NixPHP\CLI\Core\Output;
-use NixPHP\OAuth\Client\Core\Metadata;
-use NixPHP\OAuth\Client\Core\OAuth;
+use Naf\CLI\Core\AbstractCommand;
+use Naf\CLI\Core\Input;
+use Naf\CLI\Core\Output;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\OAuth;
 use Throwable;
-use function NixPHP\app;
+use function Naf\app;
 
 /**
  * Check a configured provider, and say what to register with it.

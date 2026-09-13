@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Commands\DoctorCommand;
-use NixPHP\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Commands\DoctorCommand;
+use Naf\OAuth\Client\Token\Cipher;
 use Tests\CommandTestCase;
 use Tests\Fixtures\AccountSource;
 use Tests\Fixtures\User;
-use function NixPHP\app;
+use function Naf\app;
 
 /**
  * What "nix oauth:doctor" says about a setup, and what it refuses to say.
@@ -40,7 +40,7 @@ final class DoctorCommandTest extends CommandTestCase
 
         $result = $this->execute(new DoctorCommand());
 
-        self::assertNotNull($result->line('nixphp/auth'));
+        self::assertNotNull($result->line('naf/auth'));
         self::assertNotNull($result->line('public_url'));
         self::assertNotNull($result->line('UserInterface'));
         self::assertNotNull($result->line('oauth_identities'));

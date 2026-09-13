@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Provider;
+namespace Naf\OAuth\Client\Provider;
 
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Exception\OAuthException;
 
 /**
  * One provider's settings, resolved and checked once.

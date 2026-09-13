@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use InvalidArgumentException;
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Migrations\OAuthProviderTokensMigration;
-use NixPHP\OAuth\Client\Token\Cipher;
-use NixPHP\OAuth\Client\Token\PdoTokens;
-use NixPHP\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Migrations\OAuthProviderTokensMigration;
+use Naf\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Token\PdoTokens;
+use Naf\OAuth\Client\Token\ProviderToken;
 use PDO;
 use PHPUnit\Framework\TestCase;
 

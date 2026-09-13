@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Commands;
+namespace Naf\OAuth\Client\Commands;
 
-use NixPHP\Auth\Auth;
-use NixPHP\Auth\Identity\UserInterface;
-use NixPHP\CLI\Core\{AbstractCommand, Input, Output};
-use NixPHP\OAuth\Client\Account\AccountLinkStoreInterface;
-use NixPHP\OAuth\Client\Core\OAuth;
-use NixPHP\OAuth\Client\Token\Cipher;
-use NixPHP\OAuth\Client\Token\TokenStoreInterface;
+use Naf\Auth\Auth;
+use Naf\Auth\Identity\UserInterface;
+use Naf\CLI\Core\{AbstractCommand, Input, Output};
+use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Token\TokenStoreInterface;
 use PDO;
 use Throwable;
-use function NixPHP\app;
-use function NixPHP\config;
+use function Naf\app;
+use function Naf\config;
 
 /**
  * Everything that has to be true before the first login, checked at once.
@@ -64,8 +64,8 @@ class DoctorCommand extends AbstractCommand
 
     private function dependencies(Output $output): void
     {
-        foreach (['nixphp/auth' => true, 'nixphp/session' => true, 'nixphp/client' => false,
-                  'nixphp/database' => false, 'nixphp/view' => false] as $plugin => $required) {
+        foreach (['naf/auth' => true, 'naf/session' => true, 'naf/client' => false,
+                  'naf/database' => false, 'naf/view' => false] as $plugin => $required) {
             $installed = app()->hasPlugin($plugin);
 
             $this->line($output, $plugin, match (true) {

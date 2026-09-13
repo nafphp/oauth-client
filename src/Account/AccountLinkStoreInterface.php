@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Account;
+namespace Naf\OAuth\Client\Account;
 
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
 
 /** Which local account an external identity belongs to. */
 interface AccountLinkStoreInterface
 {
     public function find(string $issuer, string $subject): ?AccountLink;
 
-    /** @throws \NixPHP\OAuth\Client\Exception\OAuthException when it already belongs to somebody. */
+    /** @throws \Naf\OAuth\Client\Exception\OAuthException when it already belongs to somebody. */
     public function link(ExternalIdentity $identity, string $userProvider, string $userId): AccountLink;
 
     public function unlink(string $issuer, string $subject): void;

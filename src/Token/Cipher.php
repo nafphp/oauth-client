@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Token;
+namespace Naf\OAuth\Client\Token;
 
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Exception\ConfigurationException;
 use SensitiveParameter;
 
 /**

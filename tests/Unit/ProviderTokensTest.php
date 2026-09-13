@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\Presets;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
-use NixPHP\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\Presets;
+use Naf\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Token\ProviderToken;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\{ArrayTransactions, FakeHttp, Signer};
 
@@ -38,7 +38,7 @@ final class ProviderTokensTest extends TestCase
     {
         self::$signer ??= new Signer();
 
-        $this->cache = sys_get_temp_dir() . '/nixphp-oauth-' . bin2hex(random_bytes(6));
+        $this->cache = sys_get_temp_dir() . '/naf-oauth-' . bin2hex(random_bytes(6));
         $this->http  = new FakeHttp();
         $this->http->on('GET', self::DISCOVERY, $this->document());
         $this->http->on('GET', self::JWKS, self::$signer->jwks());

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use NixPHP\Auth\Credentials\CredentialsInterface;
-use NixPHP\Auth\Identity\IdentityInterface;
-use NixPHP\Auth\Provider\ProviderInterface;
+use Naf\Auth\Credentials\CredentialsInterface;
+use Naf\Auth\Identity\IdentityInterface;
+use Naf\Auth\Provider\ProviderInterface;
 
 /**
  * A local account source.

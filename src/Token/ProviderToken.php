@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Token;
+namespace Naf\OAuth\Client\Token;
 
 use SensitiveParameter;
 

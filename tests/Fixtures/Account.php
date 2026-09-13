@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use NixPHP\Auth\Identity\IdentityInterface;
+use Naf\Auth\Identity\IdentityInterface;
 
 /** A local account, which can be suspended. */
 final class Account implements IdentityInterface

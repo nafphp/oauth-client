@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use NixPHP\OAuth\Client\Account\AccountLink;
-use NixPHP\OAuth\Client\Account\AccountLinkStoreInterface;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Account\AccountLink;
+use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
 
 /** The PDO store's behaviour without a database, including its uniqueness. */
 final class MemoryLinks implements AccountLinkStoreInterface

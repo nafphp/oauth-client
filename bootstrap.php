@@ -2,36 +2,36 @@
 
 declare(strict_types=1);
 
-use NixPHP\Auth\Auth;
-use NixPHP\CLI\Support\CommandRegistry;
-use NixPHP\Client\Core\Client;
-use NixPHP\Database\Core\Database;
-use NixPHP\Database\Support\MigrationRegistry;
-use NixPHP\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts, PdoAccountLinks};
-use NixPHP\OAuth\Client\Commands\{DiscoverCommand, DoctorCommand};
-use NixPHP\OAuth\Client\Core\{Flow, IdToken, Metadata, OAuth, SessionTransactions, TransactionStoreInterface, UserInfo};
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
-use NixPHP\OAuth\Client\Token\{Cipher, PdoTokens, Tokens, TokenStoreInterface};
-use NixPHP\Session\Core\Session;
+use Naf\Auth\Auth;
+use Naf\CLI\Support\CommandRegistry;
+use Naf\Client\Core\Client;
+use Naf\Database\Core\Database;
+use Naf\Database\Support\MigrationRegistry;
+use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts, PdoAccountLinks};
+use Naf\OAuth\Client\Commands\{DiscoverCommand, DoctorCommand};
+use Naf\OAuth\Client\Core\{Flow, IdToken, Metadata, OAuth, SessionTransactions, TransactionStoreInterface, UserInfo};
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Token\{Cipher, PdoTokens, Tokens, TokenStoreInterface};
+use Naf\Session\Core\Session;
 use Psr\Http\Client\ClientInterface;
-use function NixPHP\app;
-use function NixPHP\config;
+use function Naf\app;
+use function Naf\config;
 
 $container = app()->container();
 
 /**
- * The adapters need a PDO connection, and nixphp/database registers a Database.
+ * The adapters need a PDO connection, and naf/database registers a Database.
  * Bridging that here means an ordinary installation resolves on its own instead
  * of asking for a container binding nobody would think to write.
  */
-if (!$container->has(PDO::class) && app()->hasPlugin('nixphp/database')) {
+if (!$container->has(PDO::class) && app()->hasPlugin('naf/database')) {
     $container->set(PDO::class, static function () use ($container): PDO {
         $connection = $container->get(Database::class)?->getConnection();
 
         if (!$connection instanceof PDO) {
             throw new ConfigurationException(
-                'nixphp/database is installed but has no connection configured, so there is no '
+                'naf/database is installed but has no connection configured, so there is no '
                 . PDO::class . ' to work with. Configure "database", or bind your own connection.'
             );
         }
@@ -45,7 +45,7 @@ if (!$container->has(ClientInterface::class)) {
     $container->set(ClientInterface::class, static function () use ($container): ClientInterface {
         if (!class_exists(Client::class) || !$container->has(Client::class)) {
             throw new ConfigurationException(
-                'nixphp/oauth-client needs a PSR-18 client. Run "composer require nixphp/client", '
+                'naf/oauth-client needs a PSR-18 client. Run "composer require naf/client", '
                 . 'or bind your own to ' . ClientInterface::class . '.'
             );
         }
@@ -80,10 +80,10 @@ if (!$container->has(UserInfo::class)) {
 
 if (!$container->has(TransactionStoreInterface::class)) {
     $container->set(TransactionStoreInterface::class, static function () use ($container): TransactionStoreInterface {
-        if (!app()->hasPlugin('nixphp/session')) {
+        if (!app()->hasPlugin('naf/session')) {
             throw new ConfigurationException(
                 'A browser login needs a session to bind it to one browser. '
-                . 'Run "composer require nixphp/session", or bind your own '
+                . 'Run "composer require naf/session", or bind your own '
                 . TransactionStoreInterface::class . '.'
             );
         }
@@ -204,11 +204,11 @@ if (!$container->has(Tokens::class)) {
     ));
 }
 
-if (app()->hasPlugin('nixphp/database')) {
+if (app()->hasPlugin('naf/database')) {
     MigrationRegistry::addPath(__DIR__ . '/src/Migrations');
 }
 
-if (app()->hasPlugin('nixphp/cli')) {
+if (app()->hasPlugin('naf/cli')) {
     $commands = $container->get(CommandRegistry::class);
     $commands->add(DiscoverCommand::class);
     $commands->add(DoctorCommand::class);

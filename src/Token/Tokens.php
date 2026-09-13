@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Token;
+namespace Naf\OAuth\Client\Token;
 
-use NixPHP\Auth\Auth;
-use NixPHP\Auth\Identity\IdentityInterface;
-use NixPHP\OAuth\Client\Account\Accounts;
-use NixPHP\OAuth\Client\Core\Callback;
-use NixPHP\OAuth\Client\Core\OAuth;
-use NixPHP\OAuth\Client\Exception\OAuthException;
+use Naf\Auth\Auth;
+use Naf\Auth\Identity\IdentityInterface;
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Exception\OAuthException;
 
 /**
  * The provider tokens an account holds, kept usable.

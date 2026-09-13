@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Provider;
+namespace Naf\OAuth\Client\Provider;
 
 /**
  * Where a provider without OpenID Connect says who somebody is.

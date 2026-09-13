@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use InvalidArgumentException;
-use NixPHP\OAuth\Client\Account\PdoAccountLinks;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
-use NixPHP\OAuth\Client\Migrations\OAuthIdentitiesMigration;
+use Naf\OAuth\Client\Account\PdoAccountLinks;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Migrations\OAuthIdentitiesMigration;
 use PDO;
 use PHPUnit\Framework\TestCase;
 

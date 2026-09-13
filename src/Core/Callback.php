@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
-use NixPHP\OAuth\Client\Identity\ExternalIdentity;
-use NixPHP\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
+use Naf\OAuth\Client\Token\ProviderToken;
 
 /**
  * A callback that verified, and what the login it belongs to was for.

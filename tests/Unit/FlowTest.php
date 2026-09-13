@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\{ArrayTransactions, FakeHttp, Signer};
 
@@ -30,7 +30,7 @@ final class FlowTest extends TestCase
     {
         self::$signer ??= new Signer();
 
-        $this->cache = sys_get_temp_dir() . '/nixphp-oauth-' . bin2hex(random_bytes(6));
+        $this->cache = sys_get_temp_dir() . '/naf-oauth-' . bin2hex(random_bytes(6));
         $this->http  = new FakeHttp();
 
         $this->http->on('GET', self::DISCOVERY, $this->document());

@@ -27,7 +27,7 @@ return [
         'providers' => [],
 
         'accounts' => [
-            // Which nixphp/auth source owns the local accounts. Null uses the only
+            // Which naf/auth source owns the local accounts. Null uses the only
             // registered one and asks for a name once there are several.
             'provider' => null,
 
@@ -37,7 +37,7 @@ return [
             // fn(ExternalIdentity): ?IdentityInterface — required when auto_register is on.
             'create' => null,
 
-            // The link table. Its migration ships with nixphp/database installed.
+            // The link table. Its migration ships with naf/database installed.
             'table' => 'oauth_identities',
         ],
 

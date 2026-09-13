@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Exception;
+namespace Naf\OAuth\Client\Exception;
 
 use LogicException;
 

@@ -1,9 +1,9 @@
 {
-  "name": "nixphp/oauth-client",
+  "name": "naf/oauth-client",
   "description": "Sign in with external OAuth2 and OpenID Connect providers, keeping your own user model.",
   "minimum-stability": "stable",
   "license": "MIT",
-  "type": "nixphp-plugin",
+  "type": "naf-plugin",
   "authors": [
     {
       "name": "Flo Knapp",
@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "NixPHP\\OAuth\\Client\\": "src/"
+      "Naf\\OAuth\\Client\\": "src/"
     },
     "files": [
       "src/functions.php"
@@ -23,75 +23,31 @@
       "Tests\\": "tests/"
     }
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../auth",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "../client",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "../session",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "../database",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "../cli",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "../view",
-      "options": {
-        "symlink": true
-      }
-    }
-  ],
   "require": {
     "php": ">=8.3",
     "ext-json": "*",
     "ext-openssl": "*",
-    "nixphp/framework": "^0.1.0",
-    "nixphp/auth": "dev-main",
+    "naf/framework": "^0.2",
+    "naf/auth": "^0.2",
     "nyholm/psr7": "^1.8",
     "psr/http-client": "^1.0",
     "psr/http-message": "^2.0",
     "firebase/php-jwt": "^7.1",
-    "nixphp/session": "dev-main"
+    "naf/session": "^0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^12.1",
     "phpstan/phpstan": "^2.1",
-    "nixphp/client": "dev-main",
-    "nixphp/database": "dev-main",
-    "nixphp/cli": "dev-main",
-    "nixphp/view": "dev-main"
+    "naf/client": "^0.2",
+    "naf/database": "^0.2",
+    "naf/cli": "^0.2",
+    "naf/view": "^0.2"
   },
   "suggest": {
-    "nixphp/client": "A PSR-18 client for the token exchange, unless you bind your own.",
-    "nixphp/database": "Ship the account-link table as a migration.",
-    "nixphp/cli": "Resolve provider endpoints once with oauth:discover.",
-    "nixphp/view": "Override the shipped login button by shadowing its view.",
+    "naf/client": "A PSR-18 client for the token exchange, unless you bind your own.",
+    "naf/database": "Ship the account-link table as a migration.",
+    "naf/cli": "Resolve provider endpoints once with oauth:discover.",
+    "naf/view": "Override the shipped login button by shadowing its view.",
     "ext-sodium": "Encrypt stored provider tokens, when oauth:tokens:store is on."
   },
   "scripts": {

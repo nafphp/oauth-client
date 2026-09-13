@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Token;
+namespace Naf\OAuth\Client\Token;
 
 /** Where a provider's own tokens are kept between requests. */
 interface TokenStoreInterface

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\OAuth\Client\Exception\ConfigurationException;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Exception\ConfigurationException;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
 use PHPUnit\Framework\TestCase;
 
 /** What an application has to state, and what it gets for free. */

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Provider;
+namespace Naf\OAuth\Client\Provider;
 
 /**
  * What we already know about the usual providers.

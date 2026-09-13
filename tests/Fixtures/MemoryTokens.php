@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use NixPHP\OAuth\Client\Token\ProviderToken;
-use NixPHP\OAuth\Client\Token\TokenStoreInterface;
+use Naf\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Token\TokenStoreInterface;
 
 /** The PDO store's behaviour without a database, encryption aside. */
 final class MemoryTokens implements TokenStoreInterface

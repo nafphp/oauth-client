@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\ProviderConfig;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\ProviderConfig;
 use Throwable;
 
 /**

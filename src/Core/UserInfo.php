@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Core;
+namespace Naf\OAuth\Client\Core;
 
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Provider\UserInfoSource;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Provider\UserInfoSource;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -23,7 +23,7 @@ use Psr\Http\Client\ClientInterface;
  */
 final class UserInfo
 {
-    private const string AGENT = 'nixphp-oauth-client';
+    private const string AGENT = 'naf-oauth-client';
 
     public function __construct(private readonly ClientInterface $http) {}
 

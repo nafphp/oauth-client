@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client;
+namespace Naf\OAuth\Client;
 
-use NixPHP\OAuth\Client\Core\Flow;
-use NixPHP\OAuth\Client\Core\OAuth;
-use NixPHP\OAuth\Client\Token\ProviderToken;
-use NixPHP\OAuth\Client\Token\Tokens;
-use function NixPHP\app;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Token\ProviderToken;
+use Naf\OAuth\Client\Token\Tokens;
+use function Naf\app;
 
 /** The configured external provider of that name, registered by the plugin bootstrap. */
 function oauth(string $provider): Flow

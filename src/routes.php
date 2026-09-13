@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use NixPHP\OAuth\Client\Controllers\OAuthController;
-use function NixPHP\config;
-use function NixPHP\route;
+use Naf\OAuth\Client\Controllers\OAuthController;
+use function Naf\config;
+use function Naf\route;
 
 // Turn these off with oauth:routes => false when the application wants to own the
 // URLs, or the flow itself. Everything here is available directly through oauth().

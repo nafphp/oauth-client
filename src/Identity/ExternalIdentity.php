@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Identity;
+namespace Naf\OAuth\Client\Identity;
 
 /**
  * Somebody a provider has vouched for, and nothing more.

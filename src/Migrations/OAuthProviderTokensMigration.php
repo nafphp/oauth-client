@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Migrations;
+namespace Naf\OAuth\Client\Migrations;
 
-use NixPHP\Database\Core\AbstractMigration;
+use Naf\Database\Core\AbstractMigration;
 use PDO;
 
 /**
@@ -18,7 +18,7 @@ use PDO;
  * `access_token` and `refresh_token` hold ciphertext, which is why they are TEXT
  * rather than sized to what a provider currently issues.
  *
- * Named for whose tokens these are, because nixphp/oauth-server has an
+ * Named for whose tokens these are, because naf/oauth-server has an
  * oauth_tokens of its own and an application is perfectly entitled to be both a
  * client and a server.
  */

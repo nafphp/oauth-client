@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Account;
+namespace Naf\OAuth\Client\Account;
 
 /**
  * One external identity, attached to one local account.
  *
  * Both halves are two-part. Outside, an identity is `(issuer, subject)` because a
  * subject is only ever unique within its issuer. Inside, an account is
- * `(userProvider, userId)` because nixphp/auth allows several account sources and
+ * `(userProvider, userId)` because naf/auth allows several account sources and
  * their ids can collide — the same pair the session stores.
  */
 final readonly class AccountLink

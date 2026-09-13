@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client\Controllers;
+namespace Naf\OAuth\Client\Controllers;
 
-use NixPHP\OAuth\Client\Account\Accounts;
-use NixPHP\OAuth\Client\Core\Flow;
-use NixPHP\OAuth\Client\Core\OAuth;
-use NixPHP\OAuth\Client\Exception\OAuthException;
-use NixPHP\OAuth\Client\Token\Tokens;
-use NixPHP\Session\Core\Session;
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Token\Tokens;
+use Naf\Session\Core\Session;
 use Psr\Http\Message\ResponseInterface;
-use function NixPHP\abort;
-use function NixPHP\app;
-use function NixPHP\Auth\auth;
-use function NixPHP\config;
-use function NixPHP\log;
-use function NixPHP\param;
-use function NixPHP\redirect;
+use function Naf\abort;
+use function Naf\app;
+use function Naf\Auth\auth;
+use function Naf\config;
+use function Naf\log;
+use function Naf\param;
+use function Naf\redirect;
 
 /**
  * The three routes that make a login work without any callback code of your own.

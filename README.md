@@ -1,16 +1,16 @@
 <div align="center">
 
-![NixPHP](https://nixphp.github.io/docs/assets/nixphp-logo-small-square.png)
+![NAF](assets/naf-logo-small-square.png)
 
-[![NixPHP OAuth Client Plugin](https://github.com/nixphp/oauth-client/actions/workflows/php.yml/badge.svg)](https://github.com/nixphp/oauth-client/actions/workflows/php.yml)
+[![NAF OAuth Client Plugin](https://github.com/nafphp/oauth-client/actions/workflows/php.yml/badge.svg)](https://github.com/nafphp/oauth-client/actions/workflows/php.yml)
 
 </div>
 
-[← Back to NixPHP](https://github.com/nixphp/framework)
+[← Back to NAF](https://github.com/nafphp/framework)
 
 ---
 
-# nixphp/oauth-client
+# naf/oauth-client
 
 > **Sign people in with Google, Microsoft or any OpenID Connect provider — and keep your own user model.**
 
@@ -22,7 +22,7 @@ That is the whole integration. The routes, the protocol and the account lookup a
 wired; what is left for you is the one decision nobody else can make — see
 [Which account is this?](#which-account-is-this)
 
-> 🧩 Part of the official NixPHP plugin collection.
+> 🧩 Part of the official NAF plugin collection.
 > Install it when people should sign in with an account they already have.
 
 ---
@@ -65,13 +65,13 @@ repositories — can keep those tokens instead; that is opt-in and lives in
 ## 📥 Installation
 
 ```bash
-composer require nixphp/oauth-client
+composer require naf/oauth-client
 ```
 
-`nixphp/auth` and `nixphp/session` come with it — the first owns your accounts, the second is
-what binds a login to one browser. A PDO connection is found on its own when `nixphp/database`
-is configured; nothing to bind. Add `nixphp/client` for the PSR-18 transport (or bind your
-own to `Psr\Http\Client\ClientInterface`), and `nixphp/database` if you want the account-link
+`naf/auth` and `naf/session` come with it — the first owns your accounts, the second is
+what binds a login to one browser. A PDO connection is found on its own when `naf/database`
+is configured; nothing to bind. Add `naf/client` for the PSR-18 transport (or bind your
+own to `Psr\Http\Client\ClientInterface`), and `naf/database` if you want the account-link
 table as a migration.
 
 ```bash
@@ -236,7 +236,7 @@ There is nothing to clear either. The secret is read from the configuration on t
 needs it; what gets cached is discovery documents and signing keys, and neither contains it.
 
 The awkward part is that two sides have to change and they cannot do it in the same instant. A
-provider worth using holds both for a while — a `nixphp/oauth-server` does:
+provider worth using holds both for a while — a `naf/oauth-server` does:
 
 ```bash
 # on the server
@@ -274,7 +274,7 @@ location are derived or defaulted. Set them when you actually need something els
 ## The button
 
 ```php
-use function NixPHP\OAuth\Client\oauth_button;
+use function Naf\OAuth\Client\oauth_button;
 ```
 
 ```php
@@ -378,8 +378,8 @@ finishes it must be the person who started it:
 Nothing above is mandatory. `oauth()` gives you the same flow with none of the routing:
 
 ```php
-use function NixPHP\Auth\auth;
-use function NixPHP\OAuth\Client\oauth;
+use function Naf\Auth\auth;
+use function Naf\OAuth\Client\oauth;
 
 return redirect(oauth('google')->authorizationUrl());
 
@@ -445,8 +445,8 @@ a new consent screen.
 Then, wherever the API call happens:
 
 ```php
-use function NixPHP\OAuth\Client\oauth;
-use function NixPHP\OAuth\Client\oauth_token;
+use function Naf\OAuth\Client\oauth;
+use function Naf\OAuth\Client\oauth_token;
 
 $token = oauth_token('google');
 
@@ -538,7 +538,7 @@ operator can act on.
 
 ## What this is not
 
-**There is no LDAP adapter here.** Names like `ldap` appear in tests and in `nixphp/auth`'s
+**There is no LDAP adapter here.** Names like `ldap` appear in tests and in `naf/auth`'s
 examples as stand-ins for "a second account source"; that is not support, and nothing in these
 packages speaks LDAP.
 
@@ -566,7 +566,7 @@ signed-in person is does not.
 
 Taking a pending login out of the session is read-modify-write, and what makes that indivisible
 is the session backend holding a lock for the request. PHP's own file handler does;
-`nixphp/session`'s database handler does not. Two callbacks arriving for the same `state` in the
+`naf/session`'s database handler does not. Two callbacks arriving for the same `state` in the
 same instant could therefore both find it there.
 
 Every check after that still applies — the authorization code is single-use at the provider, and
@@ -630,10 +630,6 @@ follows the label, `lines()` gives the lot.
 The metadata cache goes to a temporary directory rather than into the repository, and every
 service the plugin registers is reset between tests, so a case cannot pass on what the one before
 it left behind.
-
-The `repositories` block points at the sibling plugins in this workspace while
-`nixphp/auth` and `nixphp/client` are unreleased; it goes away, along with the `dev-main`
-constraints, once they are published with `Auth::load()` and `Client::withOptions()`.
 
 CI covers PHP 8.3, 8.4 and 8.5.
 

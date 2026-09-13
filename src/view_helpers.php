@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\OAuth\Client;
+namespace Naf\OAuth\Client;
 
-use NixPHP\OAuth\Client\Core\OAuth;
-use function NixPHP\app;
-use function NixPHP\route;
+use Naf\OAuth\Client\Core\OAuth;
+use function Naf\app;
+use function Naf\route;
 
 /**
  * A link that starts a login with this provider.
@@ -37,7 +37,7 @@ function oauth_button(string $provider, ?string $label = null, ?string $next = n
 /**
  * Render one of this plugin's views.
  *
- * With nixphp/view installed this goes through its template resolution, which is
+ * With naf/view installed this goes through its template resolution, which is
  * what lets an application shadow the file. Without it, the shipped template is
  * rendered directly — same markup, no override.
  *
@@ -46,8 +46,8 @@ function oauth_button(string $provider, ?string $label = null, ?string $next = n
  */
 function render_oauth_view(string $template, array $variables): string
 {
-    if (function_exists('NixPHP\View\view')) {
-        return \NixPHP\View\view($template, $variables);
+    if (function_exists('Naf\View\view')) {
+        return \Naf\View\view($template, $variables);
     }
 
     extract($variables);
