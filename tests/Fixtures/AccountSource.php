@@ -7,6 +7,7 @@ namespace Tests\Fixtures;
 use Naf\Auth\Credentials\CredentialsInterface;
 use Naf\Auth\Identity\IdentityInterface;
 use Naf\Auth\Provider\ProviderInterface;
+use SensitiveParameter;
 
 /**
  * A local account source.
@@ -31,7 +32,7 @@ final class AccountSource implements ProviderInterface
         return $account?->active === true ? $account : null;
     }
 
-    public function authenticate(#[\SensitiveParameter] CredentialsInterface $credentials): ?IdentityInterface
+    public function authenticate(#[SensitiveParameter] CredentialsInterface $credentials): ?IdentityInterface
     {
         return null;
     }

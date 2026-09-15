@@ -10,7 +10,8 @@ final readonly class CommandResult
     public function __construct(
         public int $status,
         public string $output,
-    ) {}
+    ) {
+    }
 
     /** One line per row, trimmed, so assertions do not depend on padding. */
     public function lines(): array

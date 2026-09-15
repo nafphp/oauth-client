@@ -11,6 +11,7 @@ use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Token\Tokens;
 use Naf\Session\Core\Session;
 use Psr\Http\Message\ResponseInterface;
+
 use function Naf\abort;
 use function Naf\app;
 use function Naf\Auth\auth;

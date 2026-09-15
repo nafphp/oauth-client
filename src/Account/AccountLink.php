@@ -20,5 +20,6 @@ final readonly class AccountLink
         public string $subject,
         public string $userProvider,
         public string $userId,
-    ) {}
+    ) {
+    }
 }

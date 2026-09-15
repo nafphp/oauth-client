@@ -12,9 +12,21 @@ final class Account implements IdentityInterface
     public function __construct(
         private readonly string $id,
         public bool $active = true,
-    ) {}
+    ) {
+    }
 
-    public function getIdentifier(): string { return $this->id; }
-    public function getRoles(): iterable { return []; }
-    public function getPermissions(): iterable { return []; }
+    public function getIdentifier(): string
+    {
+        return $this->id;
+    }
+
+    public function getRoles(): iterable
+    {
+        return [];
+    }
+
+    public function getPermissions(): iterable
+    {
+        return [];
+    }
 }

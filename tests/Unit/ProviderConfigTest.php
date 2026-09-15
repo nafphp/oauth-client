@@ -254,6 +254,7 @@ final class ProviderConfigTest extends TestCase
             $run();
         } catch (ConfigurationException $e) {
             self::assertStringContainsString($needle, $e->getMessage(), $because);
+
             return;
         }
 
@@ -266,6 +267,7 @@ final class ProviderConfigTest extends TestCase
             $run();
         } catch (OAuthException $e) {
             self::assertSame($reason, $e->reason, $e->getMessage());
+
             return;
         }
 

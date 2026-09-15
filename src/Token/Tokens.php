@@ -31,7 +31,8 @@ final class Tokens
         private readonly OAuth $providers,
         private readonly Accounts $accounts,
         private readonly Auth $auth,
-    ) {}
+    ) {
+    }
 
     /**
      * Keep what a finished callback brought back.
@@ -60,7 +61,7 @@ final class Tokens
     public function of(string $provider, ?IdentityInterface $user = null, ?string $userProvider = null): ?ProviderToken
     {
         if ($user === null) {
-            $user          = $this->auth->user();
+            $user = $this->auth->user();
             $userProvider ??= $this->auth->providerName();
         }
 
@@ -87,7 +88,7 @@ final class Tokens
     public function forget(string $provider, ?IdentityInterface $user = null, ?string $userProvider = null): void
     {
         if ($user === null) {
-            $user          = $this->auth->user();
+            $user = $this->auth->user();
             $userProvider ??= $this->auth->providerName();
         }
 

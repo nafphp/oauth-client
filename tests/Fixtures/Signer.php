@@ -6,6 +6,7 @@ namespace Tests\Fixtures;
 
 use Firebase\JWT\JWT;
 use OpenSSLAsymmetricKey;
+use RuntimeException;
 
 /** An RSA key pair that behaves like a provider's: it publishes a JWKS and mints ID tokens. */
 final class Signer
@@ -17,7 +18,7 @@ final class Signer
         $key = openssl_pkey_new(['private_key_bits' => 2048, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
 
         if ($key === false) {
-            throw new \RuntimeException('Could not generate a test key.');
+            throw new RuntimeException('Could not generate a test key.');
         }
 
         $this->key = $key;

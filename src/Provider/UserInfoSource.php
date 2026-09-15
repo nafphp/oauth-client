@@ -38,7 +38,8 @@ final readonly class UserInfoSource
         public ?string $emailVerifiedField = null,
         public ?string $emailsEndpoint = null,
         public array $headers = [],
-    ) {}
+    ) {
+    }
 
     /**
      * @param array<string, mixed> $settings Preset entry, overlaid with application settings.

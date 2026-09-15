@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Naf\OAuth\Client\Account;
 
+use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Identity\ExternalIdentity;
 
 /** Which local account an external identity belongs to. */
@@ -11,7 +12,7 @@ interface AccountLinkStoreInterface
 {
     public function find(string $issuer, string $subject): ?AccountLink;
 
-    /** @throws \Naf\OAuth\Client\Exception\OAuthException when it already belongs to somebody. */
+    /** @throws OAuthException when it already belongs to somebody. */
     public function link(ExternalIdentity $identity, string $userProvider, string $userId): AccountLink;
 
     public function unlink(string $issuer, string $subject): void;

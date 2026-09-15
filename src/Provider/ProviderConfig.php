@@ -61,7 +61,8 @@ final readonly class ProviderConfig
         // the default. Some providers document the body form instead, and sending
         // both is explicitly wrong — hence a choice rather than a guess.
         public string $clientAuth = 'basic',
-    ) {}
+    ) {
+    }
 
     /**
      * Whether the provider states identity in a signed, audience-bound ID token.
@@ -126,7 +127,7 @@ final readonly class ProviderConfig
         foreach ((array) ($preset['requires'] ?? []) as $required) {
             if (self::text($settings, (string) $required) === null) {
                 throw new ConfigurationException(
-                    $at((string) $required) . ' is required for the ' . $driver . ' driver.'
+                    $at((string) $required) . ' is required for the ' . $driver . ' driver.',
                 );
             }
         }
@@ -138,7 +139,7 @@ final readonly class ProviderConfig
 
         if (!str_starts_with($callback, 'https://') && !self::isLoopback($callback)) {
             throw new ConfigurationException(
-                $at('callback_url') . ' must be https (or a loopback address for local development), got ' . $callback . '.'
+                $at('callback_url') . ' must be https (or a loopback address for local development), got ' . $callback . '.',
             );
         }
 
@@ -146,11 +147,11 @@ final readonly class ProviderConfig
         // a client secret to. Plain http is only ever a local development setup,
         // and a loopback address is the only way to say so credibly.
         foreach (['discovery_url' => $discovery, 'authorize_url' => $endpoints['authorization_endpoint'] ?? null,
-                  'token_url' => $endpoints['token_endpoint'] ?? null,
-                  'userinfo_url' => $userInfo?->endpoint] as $name => $url) {
+            'token_url'           => $endpoints['token_endpoint'] ?? null,
+            'userinfo_url'        => $userInfo?->endpoint] as $name => $url) {
             if (is_string($url) && !str_starts_with($url, 'https://') && !self::isLoopback($url)) {
                 throw new ConfigurationException(
-                    $at((string) $name) . ' must be https (or a loopback address for local development), got ' . $url . '.'
+                    $at((string) $name) . ' must be https (or a loopback address for local development), got ' . $url . '.',
                 );
             }
         }
@@ -258,7 +259,7 @@ final readonly class ProviderConfig
                 $at('issuer') . ' is required: "' . $driver . '" is not a known driver. '
                 . 'Known drivers are ' . implode(', ', Presets::names()) . '. '
                 . 'For a provider without OpenID Connect, give ' . $at('authorize_url') . ', '
-                . $at('token_url') . ' and ' . $at('userinfo_url') . ' instead.'
+                . $at('token_url') . ' and ' . $at('userinfo_url') . ' instead.',
             );
         }
 
@@ -356,7 +357,7 @@ final readonly class ProviderConfig
         if (!is_array($allowed) || $allowed === []) {
             throw new ConfigurationException(
                 $at('tenant') . ' is "' . $tenant . '", which lets more than one organisation sign in. '
-                . 'List who may, in ' . $at('allowed_tenants') . ' — directory ids, or ["*"] to accept every organisation.'
+                . 'List who may, in ' . $at('allowed_tenants') . ' — directory ids, or ["*"] to accept every organisation.',
             );
         }
 

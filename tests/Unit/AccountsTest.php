@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Closure;
 use Naf\Auth\Auth;
 use Naf\OAuth\Client\Account\Accounts;
 use Naf\OAuth\Client\Core\Callback;
@@ -11,7 +12,9 @@ use Naf\OAuth\Client\Exception\ConfigurationException;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Identity\ExternalIdentity;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{Account, AccountSource, MemoryLinks};
+use Tests\Fixtures\Account;
+use Tests\Fixtures\AccountSource;
+use Tests\Fixtures\MemoryLinks;
 
 /** Which local account a verified external identity belongs to — and which it never does. */
 final class AccountsTest extends TestCase
@@ -224,7 +227,7 @@ final class AccountsTest extends TestCase
             links: $this->links,
             auth: $this->auth,
             autoRegister: $autoRegister,
-            create: $create === null ? null : \Closure::fromCallable($create),
+            create: $create === null ? null : Closure::fromCallable($create),
         );
     }
 
@@ -255,6 +258,7 @@ final class AccountsTest extends TestCase
             $run();
         } catch (OAuthException $e) {
             self::assertSame($reason, $e->reason, $e->getMessage());
+
             return;
         }
 

@@ -6,13 +6,15 @@ namespace Naf\OAuth\Client\Commands;
 
 use Naf\Auth\Auth;
 use Naf\Auth\Identity\UserInterface;
-use Naf\CLI\Core\{AbstractCommand, Input, Output};
+use Naf\CLI\Core\AbstractCommand;
+use Naf\CLI\Core\Input;
+use Naf\CLI\Core\Output;
 use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
 use Naf\OAuth\Client\Core\OAuth;
 use Naf\OAuth\Client\Token\Cipher;
 use Naf\OAuth\Client\Token\TokenStoreInterface;
-use PDO;
 use Throwable;
+
 use function Naf\app;
 use function Naf\config;
 
@@ -51,10 +53,12 @@ class DoctorCommand extends AbstractCommand
         $this->logins($output);
 
         $output->writeEmptyLine();
-        $output->writeLine($this->problems === 0
+        $output->writeLine(
+            $this->problems === 0
             ? '  Ready to sign people in.'
             : '  ' . $this->problems . ' thing(s) to fix before the first login.',
-            $this->problems === 0 ? 'ok' : 'error');
+            $this->problems === 0 ? 'ok' : 'error',
+        );
         $output->writeEmptyLine();
 
         return $this->problems === 0 ? self::SUCCESS : self::ERROR;
@@ -65,13 +69,13 @@ class DoctorCommand extends AbstractCommand
     private function dependencies(Output $output): void
     {
         foreach (['naf/auth' => true, 'naf/session' => true, 'naf/client' => false,
-                  'naf/database' => false, 'naf/view' => false] as $plugin => $required) {
+            'naf/database'   => false, 'naf/view' => false] as $plugin => $required) {
             $installed = app()->hasPlugin($plugin);
 
             $this->line($output, $plugin, match (true) {
-                $installed  => 'installed',
-                $required   => 'MISSING — a browser login cannot work without it',
-                default     => 'not installed (optional)',
+                $installed => 'installed',
+                $required  => 'MISSING — a browser login cannot work without it',
+                default    => 'not installed (optional)',
             }, $installed || !$required);
         }
     }
@@ -211,9 +215,9 @@ class DoctorCommand extends AbstractCommand
                 // that it answered, which is the one thing this line must not
                 // claim without having asked.
                 $this->line($output, '  metadata', match (true) {
-                    !$flow->isOidc() => 'no discovery document — endpoints come from the configuration',
+                    !$flow->isOidc()                       => 'no discovery document — endpoints come from the configuration',
                     is_string($document['issuer'] ?? null) => 'belongs to ' . $document['issuer'],
-                    default => 'reachable',
+                    default                                => 'reachable',
                 }, true);
             } catch (Throwable $e) {
                 $this->line($output, '  metadata', self::reason($e), false);

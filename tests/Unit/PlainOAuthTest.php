@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Naf\OAuth\Client\Core\{Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\UserInfo;
 use Naf\OAuth\Client\Exception\ConfigurationException;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Provider\ProviderConfig;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{ArrayTransactions, FakeHttp};
+use Tests\Fixtures\ArrayTransactions;
+use Tests\Fixtures\FakeHttp;
 
 /** Providers without OpenID Connect: named endpoints, no ID token, an API call instead. */
 final class PlainOAuthTest extends TestCase
@@ -272,7 +277,7 @@ final class PlainOAuthTest extends TestCase
     }
 
     /** @param array<string, mixed> $profile */
-    private function finish(array $profile): \Naf\OAuth\Client\Core\Callback
+    private function finish(array $profile): Callback
     {
         $started = $this->start();
 
@@ -297,6 +302,7 @@ final class PlainOAuthTest extends TestCase
             $run();
         } catch (OAuthException $e) {
             self::assertSame($reason, $e->reason, $e->getMessage());
+
             return;
         }
 

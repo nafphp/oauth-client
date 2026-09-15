@@ -32,7 +32,7 @@ final class FakeHttp implements ClientInterface
     {
         $key = self::key($request->getMethod(), (string) $request->getUri());
 
-        $this->sent[] = $request;
+        $this->sent[]       = $request;
         $this->counts[$key] = ($this->counts[$key] ?? 0) + 1;
 
         if (!isset($this->script[$key])) {

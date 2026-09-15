@@ -34,7 +34,8 @@ final readonly class Callback
         public ?array $initiator,
         public string $redirectTo,
         public ?ProviderToken $token = null,
-    ) {}
+    ) {
+    }
 
     public function isLogin(): bool
     {

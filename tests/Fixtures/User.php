@@ -13,12 +13,28 @@ final class User implements UserInterface
     public function __construct(
         private readonly string $id = '1',
         private readonly bool $active = true,
-    ) {}
+    ) {
+    }
 
-    public function getIdentifier(): string { return $this->id; }
-    public function getRoles(): iterable { return []; }
-    public function getPermissions(): iterable { return []; }
-    public function isActive(): bool { return $this->active; }
+    public function getIdentifier(): string
+    {
+        return $this->id;
+    }
+
+    public function getRoles(): iterable
+    {
+        return [];
+    }
+
+    public function getPermissions(): iterable
+    {
+        return [];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
 
     public function getProfile(): UserProfile
     {

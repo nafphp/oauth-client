@@ -54,3 +54,7 @@ account linking. Use `Tests\CommandTestCase` for commands so resolved configurat
 URLs and diagnostics are checked through the actual CLI. Avoid live provider calls in tests.
 
 User docs: [OAuth client](https://nafphp.github.io/docs/oauth-client/).
+
+Follow the shared [PHP code style](https://github.com/nafphp/docs/blob/main/CODE_STYLE.md)
+and `.php-cs-fixer.dist.php`. Run `composer style:check`; `composer style:fix` applies the rules.
+Keep logical steps and local names readable, preserving public signatures and template output.

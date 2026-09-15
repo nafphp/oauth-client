@@ -6,6 +6,7 @@ namespace Naf\OAuth\Client\Core;
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Provider\ProviderConfig;
 use Throwable;
@@ -28,7 +29,9 @@ final class IdToken
 {
     private const int LEEWAY = 60;
 
-    public function __construct(private readonly Metadata $metadata) {}
+    public function __construct(private readonly Metadata $metadata)
+    {
+    }
 
     /**
      * @param array<string, mixed> $document The provider's discovery document.
@@ -92,7 +95,7 @@ final class IdToken
      */
     private function decode(string $jwt, string $jwksUri, array $permitted): array
     {
-        $header = self::header($jwt);
+        $header    = self::header($jwt);
         $algorithm = $header['alg'] ?? null;
 
         // Which algorithms are acceptable is the provider's published policy, not
@@ -129,7 +132,7 @@ final class IdToken
      * The provider's current keys, reloaded once when this token names one we do
      * not have — which is what a key rotation looks like from this side.
      *
-     * @return array<string, \Firebase\JWT\Key>
+     * @return array<string, Key>
      */
     private function keys(string $jwksUri, ?string $keyId, string $defaultAlgorithm): array
     {
@@ -148,7 +151,7 @@ final class IdToken
 
     /**
      * @param array<string, mixed> $jwks
-     * @return array<string, \Firebase\JWT\Key>
+     * @return array<string, Key>
      */
     private function parse(array $jwks, string $defaultAlgorithm): array
     {
@@ -167,7 +170,7 @@ final class IdToken
      */
     private function verifyAudience(array $claims, string $clientId): void
     {
-        $audience = $claims['aud'] ?? null;
+        $audience  = $claims['aud'] ?? null;
         $audiences = is_string($audience) ? [$audience] : (is_array($audience) ? $audience : []);
 
         if (!in_array($clientId, $audiences, true)) {
@@ -214,7 +217,7 @@ final class IdToken
     private function permittedAlgorithms(array $document): array
     {
         $supported = $document['id_token_signing_alg_values_supported'] ?? null;
-        $names = is_array($supported) ? array_values(array_filter($supported, is_string(...))) : [];
+        $names     = is_array($supported) ? array_values(array_filter($supported, is_string(...))) : [];
 
         // A provider that publishes nothing gets the one algorithm every OpenID
         // Connect provider must support. Guessing wider would mean accepting

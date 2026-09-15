@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\UserInfo;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Provider\Presets;
 use Naf\OAuth\Client\Provider\ProviderConfig;
 use Naf\OAuth\Client\Token\ProviderToken;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{ArrayTransactions, FakeHttp, Signer};
+use Tests\Fixtures\ArrayTransactions;
+use Tests\Fixtures\FakeHttp;
+use Tests\Fixtures\Signer;
 
 /**
  * What a provider actually handed out, as opposed to what it was asked for.
@@ -21,12 +26,12 @@ use Tests\Fixtures\{ArrayTransactions, FakeHttp, Signer};
  */
 final class ProviderTokensTest extends TestCase
 {
-    private const string ISSUER     = 'https://id.example.test';
-    private const string DISCOVERY  = self::ISSUER . '/.well-known/openid-configuration';
-    private const string JWKS       = self::ISSUER . '/jwks';
-    private const string TOKEN      = self::ISSUER . '/token';
-    private const string REVOKE     = self::ISSUER . '/revoke';
-    private const string CLIENT_ID  = 'client-abc';
+    private const string ISSUER    = 'https://id.example.test';
+    private const string DISCOVERY = self::ISSUER . '/.well-known/openid-configuration';
+    private const string JWKS      = self::ISSUER . '/jwks';
+    private const string TOKEN     = self::ISSUER . '/token';
+    private const string REVOKE    = self::ISSUER . '/revoke';
+    private const string CLIENT_ID = 'client-abc';
 
     private static ?Signer $signer = null;
 

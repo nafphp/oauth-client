@@ -34,7 +34,8 @@ final class Metadata
         // answering. Past this, a login fails with something a person can act on
         // rather than quietly relying on a day-old key set forever.
         private readonly int $graceAfterExpiry = 86400,
-    ) {}
+    ) {
+    }
 
     /** @return array<string, mixed> */
     public function document(string $url): array

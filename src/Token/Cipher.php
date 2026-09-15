@@ -31,8 +31,10 @@ final class Cipher
     private const int NONCE_BYTES = 24;
 
     private function __construct(
-        #[SensitiveParameter] private readonly string $key,
-    ) {}
+        #[SensitiveParameter]
+        private readonly string $key,
+    ) {
+    }
 
     /**
      * Build one from the configured key, or explain exactly what is wrong with it.
@@ -44,14 +46,14 @@ final class Cipher
         if (!function_exists('sodium_crypto_aead_xchacha20poly1305_ietf_encrypt')) {
             throw new ConfigurationException(
                 'Keeping provider tokens needs ext-sodium, which this PHP build does not have. '
-                . 'Install it, or turn oauth:tokens:store off and sign people in without storing anything.'
+                . 'Install it, or turn oauth:tokens:store off and sign people in without storing anything.',
             );
         }
 
         if (!is_string($encoded) || trim($encoded) === '') {
             throw new ConfigurationException(
                 'oauth:tokens:key is required once oauth:tokens:store is on: provider tokens are '
-                . 'encrypted before they are written. Generate one with: php -r "echo base64_encode(random_bytes(32)), PHP_EOL;"'
+                . 'encrypted before they are written. Generate one with: php -r "echo base64_encode(random_bytes(32)), PHP_EOL;"',
             );
         }
 
@@ -60,7 +62,7 @@ final class Cipher
         if ($key === false || strlen($key) !== self::KEY_BYTES) {
             throw new ConfigurationException(
                 'oauth:tokens:key has to be base64 of exactly ' . self::KEY_BYTES
-                . ' random bytes. Generate one with: php -r "echo base64_encode(random_bytes(32)), PHP_EOL;"'
+                . ' random bytes. Generate one with: php -r "echo base64_encode(random_bytes(32)), PHP_EOL;"',
             );
         }
 
@@ -119,7 +121,7 @@ final class Cipher
             throw new ConfigurationException(
                 'A stored provider token could not be decrypted. Either oauth:tokens:key '
                 . 'changed, or the row does not belong where it is. Affected people have to '
-                . 'grant access again.'
+                . 'grant access again.',
             );
         }
 
