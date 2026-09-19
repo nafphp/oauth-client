@@ -40,17 +40,27 @@ final class WiringTest extends TestCase
         Config::class, PDO::class, Cipher::class, TokenStoreInterface::class, Tokens::class,
     ];
 
+    private string $cache;
+
     protected function setUp(): void
     {
         if (!defined('BASE_PATH')) {
             define('BASE_PATH', dirname(__DIR__) . '/Fixtures');
         }
 
+        $this->cache = sys_get_temp_dir() . '/naf-oauth-wiring-' . bin2hex(random_bytes(6));
+
         $this->reset();
     }
 
     protected function tearDown(): void
     {
+        foreach (glob($this->cache . '/*') ?: [] as $file) {
+            @unlink($file);
+        }
+
+        @rmdir($this->cache);
+
         $this->reset();
     }
 
@@ -274,8 +284,11 @@ final class WiringTest extends TestCase
     {
         app()->container()->set(Config::class, new Config([
             'public_url' => $publicUrl,
-            'oauth'      => $oauth,
-            'auth'       => $auth ?? ['session' => false, 'providers' => []],
+
+            // Never the application's own directory: resolving a provider warms the
+            // metadata cache, which would otherwise be written into the repository.
+            'oauth' => ['cache_path' => $this->cache] + $oauth,
+            'auth'  => $auth ?? ['session' => false, 'providers' => []],
         ]));
     }
 
