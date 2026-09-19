@@ -6,14 +6,24 @@ namespace Tests\Unit;
 
 use Naf\Auth\Auth;
 use Naf\OAuth\Client\Account\Accounts;
-use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, OAuth, UserInfo};
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Core\UserInfo;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Identity\ExternalIdentity;
 use Naf\OAuth\Client\Provider\ProviderConfig;
 use Naf\OAuth\Client\Token\ProviderToken;
 use Naf\OAuth\Client\Token\Tokens;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{Account, AccountSource, ArrayTransactions, FakeHttp, MemoryLinks, MemoryTokens};
+use Tests\Fixtures\Account;
+use Tests\Fixtures\AccountSource;
+use Tests\Fixtures\ArrayTransactions;
+use Tests\Fixtures\FakeHttp;
+use Tests\Fixtures\MemoryLinks;
+use Tests\Fixtures\MemoryTokens;
 
 /**
  * Handing out a token somebody can actually use.

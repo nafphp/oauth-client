@@ -8,7 +8,9 @@ use Naf\OAuth\Client\Commands\DoctorCommand;
 use Naf\OAuth\Client\Token\Cipher;
 use Tests\CommandTestCase;
 use Tests\Fixtures\AccountSource;
+use Tests\Fixtures\FakeHttp;
 use Tests\Fixtures\User;
+
 use function Naf\app;
 
 /**
@@ -169,7 +171,7 @@ final class DoctorCommandTest extends CommandTestCase
         array $login = [],
         array $tokens = [],
         ?string $publicUrl = 'https://app.example.test',
-    ): \Tests\Fixtures\FakeHttp {
+    ): FakeHttp {
         $http = $this->provider();
 
         $this->database();

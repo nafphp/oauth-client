@@ -20,18 +20,19 @@ class OAuthIdentitiesMigration extends AbstractMigration
 {
     public function up(PDO $connection): void
     {
-        $connection->exec(<<<'SQL'
-            CREATE TABLE IF NOT EXISTS oauth_identities
-            (
-                link          CHAR(64)     NOT NULL PRIMARY KEY,
-                provider      VARCHAR(64)  NOT NULL,
-                issuer        VARCHAR(255) NOT NULL,
-                subject       VARCHAR(255) NOT NULL,
-                user_provider VARCHAR(64)  NOT NULL,
-                user_id       VARCHAR(190) NOT NULL,
-                created_at    INT          NOT NULL
-            )
-        SQL
+        $connection->exec(
+            <<<'SQL'
+                CREATE TABLE IF NOT EXISTS oauth_identities
+                (
+                    link          CHAR(64)     NOT NULL PRIMARY KEY,
+                    provider      VARCHAR(64)  NOT NULL,
+                    issuer        VARCHAR(255) NOT NULL,
+                    subject       VARCHAR(255) NOT NULL,
+                    user_provider VARCHAR(64)  NOT NULL,
+                    user_id       VARCHAR(190) NOT NULL,
+                    created_at    INT          NOT NULL
+                )
+            SQL,
         );
 
         // An issuer and a subject are case-sensitive identifiers, and MySQL's
@@ -41,7 +42,7 @@ class OAuthIdentitiesMigration extends AbstractMigration
             foreach ([['issuer', 255], ['subject', 255], ['provider', 64]] as [$column, $length]) {
                 $connection->exec(
                     'ALTER TABLE oauth_identities MODIFY ' . $column
-                    . ' VARCHAR(' . $length . ') COLLATE utf8mb4_bin NOT NULL'
+                    . ' VARCHAR(' . $length . ') COLLATE utf8mb4_bin NOT NULL',
                 );
             }
         }

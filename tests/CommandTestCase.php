@@ -5,17 +5,28 @@ declare(strict_types=1);
 namespace Tests;
 
 use Naf\Auth\Auth;
-use Naf\CLI\Core\{AbstractCommand, Input, Output};
+use Naf\CLI\Core\AbstractCommand;
+use Naf\CLI\Core\Input;
+use Naf\CLI\Core\Output;
 use Naf\Core\Config;
-use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
-use Naf\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface, UserInfo};
-use Naf\OAuth\Client\Migrations\{OAuthIdentitiesMigration, OAuthProviderTokensMigration};
-use Naf\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
+use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Core\TransactionStoreInterface;
+use Naf\OAuth\Client\Core\UserInfo;
+use Naf\OAuth\Client\Migrations\OAuthIdentitiesMigration;
+use Naf\OAuth\Client\Migrations\OAuthProviderTokensMigration;
+use Naf\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Token\Tokens;
+use Naf\OAuth\Client\Token\TokenStoreInterface;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Tests\Fixtures\FakeHttp;
 use Tests\Fixtures\Signer;
+
 use function Naf\app;
 
 /**

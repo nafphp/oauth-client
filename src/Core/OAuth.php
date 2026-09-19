@@ -29,7 +29,8 @@ final class OAuth
         private readonly Closure $factory,
         private readonly ?string $publicUrl,
         private readonly string $configPath = 'auth:logins',
-    ) {}
+    ) {
+    }
 
     public function has(string $key): bool
     {
@@ -51,7 +52,7 @@ final class OAuth
         if (!isset($this->providers[$key])) {
             throw new ConfigurationException(
                 'No login "' . $key . '" is configured under ' . $this->configPath . '. '
-                . 'Configured: ' . (implode(', ', $this->names()) ?: 'none') . '.'
+                . 'Configured: ' . (implode(', ', $this->names()) ?: 'none') . '.',
             );
         }
 
@@ -59,7 +60,7 @@ final class OAuth
             throw new ConfigurationException(
                 'public_url is required: every redirect URI is derived from it, and a request '
                 . 'cannot be trusted to say where this application lives. '
-                . 'Set it in app/config.php, for example "public_url" => "https://example.com".'
+                . 'Set it in app/config.php, for example "public_url" => "https://example.com".',
             );
         }
 

@@ -23,11 +23,14 @@ final readonly class ProviderToken
         public string $provider,
         public string $issuer,
         public string $subject,
-        #[SensitiveParameter] public string $accessToken,
-        #[SensitiveParameter] public ?string $refreshToken = null,
+        #[SensitiveParameter]
+        public string $accessToken,
+        #[SensitiveParameter]
+        public ?string $refreshToken = null,
         public array $scope = [],
         public ?int $expiresAt = null,
-    ) {}
+    ) {
+    }
 
     /**
      * Whether this needs renewing before it is used.
@@ -64,8 +67,10 @@ final readonly class ProviderToken
      * @param list<string> $scope
      */
     public function renewed(
-        #[SensitiveParameter] string $accessToken,
-        #[SensitiveParameter] ?string $refreshToken,
+        #[SensitiveParameter]
+        string $accessToken,
+        #[SensitiveParameter]
+        ?string $refreshToken,
         array $scope,
         ?int $expiresAt,
     ): self {
@@ -90,13 +95,13 @@ final readonly class ProviderToken
     public function __debugInfo(): array
     {
         return [
-            'provider'      => $this->provider,
-            'issuer'        => $this->issuer,
-            'subject'       => $this->subject,
-            'accessToken'   => '[redacted]',
-            'refreshToken'  => $this->refreshToken === null ? null : '[redacted]',
-            'scope'         => $this->scope,
-            'expiresAt'     => $this->expiresAt,
+            'provider'     => $this->provider,
+            'issuer'       => $this->issuer,
+            'subject'      => $this->subject,
+            'accessToken'  => '[redacted]',
+            'refreshToken' => $this->refreshToken === null ? null : '[redacted]',
+            'scope'        => $this->scope,
+            'expiresAt'    => $this->expiresAt,
         ];
     }
 }

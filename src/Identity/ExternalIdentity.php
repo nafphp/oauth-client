@@ -25,7 +25,8 @@ final readonly class ExternalIdentity
         public ?string $email = null,
         public bool $emailVerified = false,
         public ?string $name = null,
-    ) {}
+    ) {
+    }
 
     public function claim(string $name, mixed $default = null): mixed
     {

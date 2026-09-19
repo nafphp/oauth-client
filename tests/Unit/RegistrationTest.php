@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Closure;
 use Naf\Auth\Auth;
-use Naf\OAuth\Client\Account\{Accounts, PdoAccountLinks};
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Account\PdoAccountLinks;
 use Naf\OAuth\Client\Core\Callback;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Identity\ExternalIdentity;
@@ -13,7 +15,8 @@ use Naf\OAuth\Client\Migrations\OAuthIdentitiesMigration;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{Account, AccountSource};
+use Tests\Fixtures\Account;
+use Tests\Fixtures\AccountSource;
 
 /**
  * Creating an account for a first external login, against a real database.
@@ -118,7 +121,7 @@ final class RegistrationTest extends TestCase
             links: $this->links,
             auth: $this->auth,
             autoRegister: true,
-            create: \Closure::fromCallable($create),
+            create: Closure::fromCallable($create),
         );
     }
 
@@ -143,6 +146,7 @@ final class RegistrationTest extends TestCase
             $run();
         } catch (OAuthException $e) {
             self::assertSame($reason, $e->reason, $e->getMessage());
+
             return;
         }
 

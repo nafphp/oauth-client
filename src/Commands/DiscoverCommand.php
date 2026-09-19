@@ -10,6 +10,7 @@ use Naf\CLI\Core\Output;
 use Naf\OAuth\Client\Core\Metadata;
 use Naf\OAuth\Client\Core\OAuth;
 use Throwable;
+
 use function Naf\app;
 
 /**

@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Naf\OAuth\Client\Core\{Callback, Flow, IdToken, Metadata, UserInfo};
+use Naf\OAuth\Client\Core\Callback;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\UserInfo;
 use Naf\OAuth\Client\Exception\OAuthException;
 use Naf\OAuth\Client\Provider\ProviderConfig;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixtures\{ArrayTransactions, FakeHttp, Signer};
+use Tests\Fixtures\ArrayTransactions;
+use Tests\Fixtures\FakeHttp;
+use Tests\Fixtures\Signer;
 
 /** Starting a login, and what the callback accepts — above all, what it does not. */
 final class FlowTest extends TestCase
@@ -265,7 +271,7 @@ final class FlowTest extends TestCase
 
     public function testALoginStartedWithAnotherProviderIsRefused(): void
     {
-        $started = $this->start();
+        $started                                                    = $this->start();
         $this->transactions->pending[$started['state']]['provider'] = 'somebody-else';
 
         $this->expectExceptionReason('provider_mismatch', fn() => $this->flow->callback([
@@ -332,11 +338,11 @@ final class FlowTest extends TestCase
     {
         $started = $this->start();
 
-        $token    = self::$signer->sign($this->claims($started['nonce']));
-        $segments = explode('.', $token);
-        $payload  = json_decode((string) base64_decode(strtr($segments[1], '-_', '+/'), true), true);
+        $token          = self::$signer->sign($this->claims($started['nonce']));
+        $segments       = explode('.', $token);
+        $payload        = json_decode((string) base64_decode(strtr($segments[1], '-_', '+/'), true), true);
         $payload['sub'] = 'somebody-else';
-        $segments[1] = rtrim(strtr(base64_encode((string) json_encode($payload)), '+/', '-_'), '=');
+        $segments[1]    = rtrim(strtr(base64_encode((string) json_encode($payload)), '+/', '-_'), '=');
 
         $this->http->on('POST', self::TOKEN, ['id_token' => implode('.', $segments)]);
 
@@ -457,6 +463,7 @@ final class FlowTest extends TestCase
             $run();
         } catch (OAuthException $e) {
             self::assertSame($reason, $e->reason, $e->getMessage());
+
             return;
         }
 
@@ -604,7 +611,7 @@ final class FlowTest extends TestCase
     public function testAnAlgorithmTheProviderDoesNotPublishIsRefused(): void
     {
         // Published before anything is fetched: the document is cached on first use.
-        $document = $this->document();
+        $document                                          = $this->document();
         $document['id_token_signing_alg_values_supported'] = ['ES256'];
         $this->http->on('GET', self::DISCOVERY, $document);
 

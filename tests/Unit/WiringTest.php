@@ -8,15 +8,26 @@ use Naf\Auth\Auth;
 use Naf\CLI\Support\CommandRegistry;
 use Naf\Core\Config;
 use Naf\Database\Support\MigrationRegistry;
-use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts};
+use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
+use Naf\OAuth\Client\Account\Accounts;
 use Naf\OAuth\Client\Commands\DiscoverCommand;
-use Naf\OAuth\Client\Core\{IdToken, Metadata, OAuth, TransactionStoreInterface};
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Core\TransactionStoreInterface;
 use Naf\OAuth\Client\Exception\ConfigurationException;
-use Naf\OAuth\Client\Token\{Cipher, Tokens, TokenStoreInterface};
+use Naf\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Token\Tokens;
+use Naf\OAuth\Client\Token\TokenStoreInterface;
 use PDO;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use Tests\Fixtures\{ArrayTransactions, FakeHttp};
+use Tests\Fixtures\AccountSource;
+use Tests\Fixtures\ArrayTransactions;
+use Tests\Fixtures\FakeHttp;
+use Tests\Fixtures\MemoryLinks;
+
 use function Naf\app;
 use function Naf\OAuth\Client\oauth;
 
@@ -101,9 +112,9 @@ final class WiringTest extends TestCase
 
     public function testTheAccountResolverUsesTheSoleAuthSource(): void
     {
-        app()->container()->set(AccountLinkStoreInterface::class, new \Tests\Fixtures\MemoryLinks());
-        app()->container()->set(\Tests\Fixtures\AccountSource::class, new \Tests\Fixtures\AccountSource());
-        $this->configure([], auth: ['session' => false, 'providers' => ['database' => \Tests\Fixtures\AccountSource::class]]);
+        app()->container()->set(AccountLinkStoreInterface::class, new MemoryLinks());
+        app()->container()->set(AccountSource::class, new AccountSource());
+        $this->configure([], auth: ['session' => false, 'providers' => ['database' => AccountSource::class]]);
         $this->boot();
 
         self::assertInstanceOf(Accounts::class, app()->container()->get(Accounts::class));
@@ -111,7 +122,7 @@ final class WiringTest extends TestCase
 
     public function testACallableIsRequiredForAutomaticRegistration(): void
     {
-        app()->container()->set(AccountLinkStoreInterface::class, new \Tests\Fixtures\MemoryLinks());
+        app()->container()->set(AccountLinkStoreInterface::class, new MemoryLinks());
         $this->configure(['accounts' => ['auto_register' => true, 'create' => 'not a function']]);
         $this->boot();
 
@@ -306,7 +317,7 @@ final class WiringTest extends TestCase
             self::fail('Expected a ConfigurationException mentioning "' . $needle . '".');
         } catch (ConfigurationException $e) {
             self::assertStringContainsString($needle, $e->getMessage());
-        } catch (\Psr\Container\ContainerExceptionInterface $e) {
+        } catch (ContainerExceptionInterface $e) {
             // The container wraps factory failures; the message is carried through.
             self::assertStringContainsString($needle, $e->getMessage());
         }

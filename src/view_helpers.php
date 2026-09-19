@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Naf\OAuth\Client;
 
 use Naf\OAuth\Client\Core\OAuth;
+
 use function Naf\app;
 use function Naf\route;
 

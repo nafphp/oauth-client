@@ -14,6 +14,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+
 use function Naf\app;
 
 /**
@@ -40,7 +41,8 @@ final class Flow
         // default anywhere, and asking for it when nothing will be stored only
         // puts a longer sentence on somebody's consent screen.
         private readonly bool $offlineAccess = false,
-    ) {}
+    ) {
+    }
 
     public function key(): string
     {
@@ -168,7 +170,7 @@ final class Flow
         if ($transaction === null) {
             throw OAuthException::of(
                 'state_unknown',
-                'No login is waiting for this state: it was already used, it expired, or it began in another browser.'
+                'No login is waiting for this state: it was already used, it expired, or it began in another browser.',
             );
         }
 
@@ -252,7 +254,7 @@ final class Flow
         if ($token->refreshToken === null) {
             throw OAuthException::of(
                 'consent_required',
-                $this->provider->key . ' issued no refresh token, so there is nothing to renew with.'
+                $this->provider->key . ' issued no refresh token, so there is nothing to renew with.',
             );
         }
 
@@ -416,7 +418,7 @@ final class Flow
         if (!is_string($endpoint) || $endpoint === '') {
             throw OAuthException::of(
                 'no_endpoint',
-                'The discovery document of ' . $this->provider->key . ' names no ' . $name . '.'
+                'The discovery document of ' . $this->provider->key . ' names no ' . $name . '.',
             );
         }
 
@@ -460,7 +462,7 @@ final class Flow
                 // client_secret_basic keeps the secret out of the body, and out of any
                 // log line that records one. RFC 6749 §2.3.1 form-encodes both halves.
                 $headers['Authorization'] = 'Basic ' . base64_encode(
-                    rawurlencode($this->provider->clientId) . ':' . rawurlencode($this->provider->clientSecret)
+                    rawurlencode($this->provider->clientId) . ':' . rawurlencode($this->provider->clientSecret),
                 );
             }
         }

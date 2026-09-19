@@ -7,14 +7,27 @@ use Naf\CLI\Support\CommandRegistry;
 use Naf\Client\Core\Client;
 use Naf\Database\Core\Database;
 use Naf\Database\Support\MigrationRegistry;
-use Naf\OAuth\Client\Account\{AccountLinkStoreInterface, Accounts, PdoAccountLinks};
-use Naf\OAuth\Client\Commands\{DiscoverCommand, DoctorCommand};
-use Naf\OAuth\Client\Core\{Flow, IdToken, Metadata, OAuth, SessionTransactions, TransactionStoreInterface, UserInfo};
+use Naf\OAuth\Client\Account\AccountLinkStoreInterface;
+use Naf\OAuth\Client\Account\Accounts;
+use Naf\OAuth\Client\Account\PdoAccountLinks;
+use Naf\OAuth\Client\Commands\DiscoverCommand;
+use Naf\OAuth\Client\Commands\DoctorCommand;
+use Naf\OAuth\Client\Core\Flow;
+use Naf\OAuth\Client\Core\IdToken;
+use Naf\OAuth\Client\Core\Metadata;
+use Naf\OAuth\Client\Core\OAuth;
+use Naf\OAuth\Client\Core\SessionTransactions;
+use Naf\OAuth\Client\Core\TransactionStoreInterface;
+use Naf\OAuth\Client\Core\UserInfo;
 use Naf\OAuth\Client\Exception\ConfigurationException;
 use Naf\OAuth\Client\Provider\ProviderConfig;
-use Naf\OAuth\Client\Token\{Cipher, PdoTokens, Tokens, TokenStoreInterface};
+use Naf\OAuth\Client\Token\Cipher;
+use Naf\OAuth\Client\Token\PdoTokens;
+use Naf\OAuth\Client\Token\Tokens;
+use Naf\OAuth\Client\Token\TokenStoreInterface;
 use Naf\Session\Core\Session;
 use Psr\Http\Client\ClientInterface;
+
 use function Naf\app;
 use function Naf\config;
 
@@ -32,7 +45,7 @@ if (!$container->has(PDO::class) && app()->hasPlugin('naf/database')) {
         if (!$connection instanceof PDO) {
             throw new ConfigurationException(
                 'naf/database is installed but has no connection configured, so there is no '
-                . PDO::class . ' to work with. Configure "database", or bind your own connection.'
+                . PDO::class . ' to work with. Configure "database", or bind your own connection.',
             );
         }
 
@@ -46,7 +59,7 @@ if (!$container->has(ClientInterface::class)) {
         if (!class_exists(Client::class) || !$container->has(Client::class)) {
             throw new ConfigurationException(
                 'naf/oauth-client needs a PSR-18 client. Run "composer require naf/client", '
-                . 'or bind your own to ' . ClientInterface::class . '.'
+                . 'or bind your own to ' . ClientInterface::class . '.',
             );
         }
 
@@ -84,7 +97,7 @@ if (!$container->has(TransactionStoreInterface::class)) {
             throw new ConfigurationException(
                 'A browser login needs a session to bind it to one browser. '
                 . 'Run "composer require naf/session", or bind your own '
-                . TransactionStoreInterface::class . '.'
+                . TransactionStoreInterface::class . '.',
             );
         }
 
@@ -106,19 +119,19 @@ if (!$container->has(OAuth::class)) {
 
         return new OAuth(
             providers: $logins,
-        factory: static fn(ProviderConfig $provider): Flow => new Flow(
-            provider: $provider,
-            http: $container->get(ClientInterface::class),
-            transactions: $container->get(TransactionStoreInterface::class),
-            metadata: $container->get(Metadata::class),
-            idToken: $container->get(IdToken::class),
-            userInfo: $container->get(UserInfo::class),
-            afterLogin: (string) config('oauth:after_login', '/'),
+            factory: static fn(ProviderConfig $provider): Flow => new Flow(
+                provider: $provider,
+                http: $container->get(ClientInterface::class),
+                transactions: $container->get(TransactionStoreInterface::class),
+                metadata: $container->get(Metadata::class),
+                idToken: $container->get(IdToken::class),
+                userInfo: $container->get(UserInfo::class),
+                afterLogin: (string) config('oauth:after_login', '/'),
 
-            // Asking for offline access is only honest where the answer will be
-            // kept. Read here rather than in the Flow, which has no opinion
-            // about storage.
-            offlineAccess: config('oauth:tokens:store', false) === true,
+                // Asking for offline access is only honest where the answer will be
+                // kept. Read here rather than in the Flow, which has no opinion
+                // about storage.
+                offlineAccess: config('oauth:tokens:store', false) === true,
             ),
             publicUrl: config('public_url'),
             configPath: $path,
@@ -132,7 +145,7 @@ if (!$container->has(AccountLinkStoreInterface::class)) {
             throw new ConfigurationException(
                 'The account link store needs a PDO connection bound to ' . PDO::class . '. '
                 . 'Bind yours in the application bootstrap, or bind your own '
-                . AccountLinkStoreInterface::class . ' instead.'
+                . AccountLinkStoreInterface::class . ' instead.',
             );
         }
 
@@ -175,7 +188,7 @@ if (!$container->has(TokenStoreInterface::class)) {
             throw new ConfigurationException(
                 'Provider tokens are not being kept. Set oauth:tokens:store to true if the '
                 . 'application needs to call a provider on somebody\'s behalf, or bind your own '
-                . TokenStoreInterface::class . '.'
+                . TokenStoreInterface::class . '.',
             );
         }
 
@@ -183,7 +196,7 @@ if (!$container->has(TokenStoreInterface::class)) {
             throw new ConfigurationException(
                 'The provider token store needs a PDO connection bound to ' . PDO::class . '. '
                 . 'Bind yours in the application bootstrap, or bind your own '
-                . TokenStoreInterface::class . ' instead.'
+                . TokenStoreInterface::class . ' instead.',
             );
         }
 

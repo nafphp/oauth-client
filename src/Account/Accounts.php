@@ -10,6 +10,7 @@ use Naf\Auth\Identity\IdentityInterface;
 use Naf\OAuth\Client\Core\Callback;
 use Naf\OAuth\Client\Exception\ConfigurationException;
 use Naf\OAuth\Client\Exception\OAuthException;
+use Naf\OAuth\Client\Identity\ExternalIdentity;
 
 /**
  * The one decision this plugin will not make for you, with everything around it
@@ -29,14 +30,15 @@ use Naf\OAuth\Client\Exception\OAuthException;
  */
 final class Accounts
 {
-    /** @param (Closure(\Naf\OAuth\Client\Identity\ExternalIdentity): ?IdentityInterface)|null $create */
+    /** @param (Closure(ExternalIdentity): ?IdentityInterface)|null $create */
     public function __construct(
         private readonly AccountLinkStoreInterface $links,
         private readonly Auth $auth,
         private readonly ?string $configuredProvider = null,
         private readonly bool $autoRegister = false,
         private readonly ?Closure $create = null,
-    ) {}
+    ) {
+    }
 
     /** Finish a verified callback, whichever kind it was. */
     public function complete(Callback $callback): IdentityInterface
@@ -67,14 +69,14 @@ final class Accounts
         if (!$this->autoRegister) {
             throw OAuthException::of(
                 'not_linked',
-                'No account is linked to that login yet. Sign in and connect it, or turn on oauth:accounts:auto_register.'
+                'No account is linked to that login yet. Sign in and connect it, or turn on oauth:accounts:auto_register.',
             );
         }
 
         if ($this->create === null) {
             throw new ConfigurationException(
                 'oauth:accounts:auto_register is on, but oauth:accounts:create is not set. '
-                . 'Give it a function that turns an ExternalIdentity into one of your accounts.'
+                . 'Give it a function that turns an ExternalIdentity into one of your accounts.',
             );
         }
 

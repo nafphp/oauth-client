@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Naf\OAuth\Client\Controllers\OAuthController;
+
 use function Naf\config;
 use function Naf\route;
 

@@ -26,20 +26,21 @@ class OAuthProviderTokensMigration extends AbstractMigration
 {
     public function up(PDO $connection): void
     {
-        $connection->exec(<<<'SQL'
-            CREATE TABLE IF NOT EXISTS oauth_provider_tokens
-            (
-                link          CHAR(64)     NOT NULL PRIMARY KEY,
-                provider      VARCHAR(64)  NOT NULL,
-                issuer        VARCHAR(255) NOT NULL,
-                subject       VARCHAR(255) NOT NULL,
-                access_token  TEXT         NOT NULL,
-                refresh_token TEXT             NULL,
-                scope         TEXT         NOT NULL,
-                expires_at    INT              NULL,
-                updated_at    INT          NOT NULL
-            )
-        SQL
+        $connection->exec(
+            <<<'SQL'
+                CREATE TABLE IF NOT EXISTS oauth_provider_tokens
+                (
+                    link          CHAR(64)     NOT NULL PRIMARY KEY,
+                    provider      VARCHAR(64)  NOT NULL,
+                    issuer        VARCHAR(255) NOT NULL,
+                    subject       VARCHAR(255) NOT NULL,
+                    access_token  TEXT         NOT NULL,
+                    refresh_token TEXT             NULL,
+                    scope         TEXT         NOT NULL,
+                    expires_at    INT              NULL,
+                    updated_at    INT          NOT NULL
+                )
+            SQL,
         );
 
         // An issuer and a subject are case-sensitive identifiers, and MySQL's
@@ -49,7 +50,7 @@ class OAuthProviderTokensMigration extends AbstractMigration
             foreach ([['issuer', 255], ['subject', 255], ['provider', 64]] as [$column, $length]) {
                 $connection->exec(
                     'ALTER TABLE oauth_provider_tokens MODIFY ' . $column
-                    . ' VARCHAR(' . $length . ') COLLATE utf8mb4_bin NOT NULL'
+                    . ' VARCHAR(' . $length . ') COLLATE utf8mb4_bin NOT NULL',
                 );
             }
         }

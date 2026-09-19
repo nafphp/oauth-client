@@ -8,6 +8,7 @@ use Naf\OAuth\Client\Core\Flow;
 use Naf\OAuth\Client\Core\OAuth;
 use Naf\OAuth\Client\Token\ProviderToken;
 use Naf\OAuth\Client\Token\Tokens;
+
 use function Naf\app;
 
 /** The configured external provider of that name, registered by the plugin bootstrap. */

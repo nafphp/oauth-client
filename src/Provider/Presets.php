@@ -65,7 +65,7 @@ final class Presets
             // there is nothing to ask for; re-authorising is how scopes grow.
             'offline_scope' => null,
             'grant_params'  => ['prompt' => 'consent'],
-            'endpoints' => [
+            'endpoints'     => [
                 'authorization_endpoint' => 'https://github.com/login/oauth/authorize',
                 'token_endpoint'         => 'https://github.com/login/oauth/access_token',
             ],
@@ -78,7 +78,7 @@ final class Presets
                 // /user answers email: null unless the address is public, so the
                 // verified one is fetched from the address list instead.
                 'emails_endpoint' => 'https://api.github.com/user/emails',
-                'headers' => [
+                'headers'         => [
                     'Accept'               => 'application/vnd.github+json',
                     'X-GitHub-Api-Version' => '2022-11-28',
                 ],

@@ -9,6 +9,7 @@ use Naf\OAuth\Client\Provider\UserInfoSource;
 use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
+use SensitiveParameter;
 
 /**
  * Who a provider without OpenID Connect says this is.
@@ -25,10 +26,12 @@ final class UserInfo
 {
     private const string AGENT = 'naf-oauth-client';
 
-    public function __construct(private readonly ClientInterface $http) {}
+    public function __construct(private readonly ClientInterface $http)
+    {
+    }
 
     /** @return array<string, mixed> */
-    public function claims(UserInfoSource $source, #[\SensitiveParameter] string $accessToken): array
+    public function claims(UserInfoSource $source, #[SensitiveParameter] string $accessToken): array
     {
         $raw = $this->get($source->endpoint, $accessToken, $source->headers);
 
@@ -41,7 +44,7 @@ final class UserInfo
             );
         }
 
-        $claims = $raw;
+        $claims        = $raw;
         $claims['iss'] = $source->issuer;
         $claims['sub'] = (string) $subject;
 
@@ -65,7 +68,7 @@ final class UserInfo
      * @param array<string, mixed> $raw
      * @return array{0: string|null, 1: bool}
      */
-    private function email(UserInfoSource $source, array $raw, #[\SensitiveParameter] string $accessToken): array
+    private function email(UserInfoSource $source, array $raw, #[SensitiveParameter] string $accessToken): array
     {
         $email = $source->emailField === null ? null : $raw[$source->emailField] ?? null;
 
@@ -101,7 +104,7 @@ final class UserInfo
      *
      * @return list<array<string, mixed>>
      */
-    private function addresses(UserInfoSource $source, #[\SensitiveParameter] string $accessToken): array
+    private function addresses(UserInfoSource $source, #[SensitiveParameter] string $accessToken): array
     {
         try {
             $listed = $this->get((string) $source->emailsEndpoint, $accessToken, $source->headers);
@@ -116,14 +119,14 @@ final class UserInfo
      * @param array<string, string> $headers
      * @return array<mixed>
      */
-    private function get(string $url, #[\SensitiveParameter] string $accessToken, array $headers): array
+    private function get(string $url, #[SensitiveParameter] string $accessToken, array $headers): array
     {
         try {
             $response = $this->http->sendRequest(new Request('GET', $url, [
                 // A User-Agent is not politeness here: some provider APIs reject a
                 // request without one outright.
-                'User-Agent'    => self::AGENT,
-                'Accept'        => 'application/json',
+                'User-Agent' => self::AGENT,
+                'Accept'     => 'application/json',
                 ...$headers,
                 'Authorization' => 'Bearer ' . $accessToken,
             ]));

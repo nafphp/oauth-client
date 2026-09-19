@@ -30,7 +30,8 @@ final class SessionTransactions implements TransactionStoreInterface
         private readonly string $key = 'oauth',
         private readonly int $ttl = 600,
         private readonly int $limit = 5,
-    ) {}
+    ) {
+    }
 
     public function put(string $state, array $data): void
     {
@@ -39,12 +40,12 @@ final class SessionTransactions implements TransactionStoreInterface
         if (session_status() !== PHP_SESSION_ACTIVE) {
             throw OAuthException::of(
                 'no_session',
-                'A browser login needs an active session. Install naf/session and let it start.'
+                'A browser login needs an active session. Install naf/session and let it start.',
             );
         }
 
-        $pending          = $this->pending();
-        $pending[$state]  = ['at' => time()] + $data;
+        $pending         = $this->pending();
+        $pending[$state] = ['at' => time()] + $data;
 
         // Oldest out first: somebody who opens a sixth tab loses their first
         // attempt, not their latest one.
