@@ -58,3 +58,10 @@ User docs: [OAuth client](https://nafphp.github.io/docs/oauth-client/).
 Follow the shared [PHP code style](https://github.com/nafphp/docs/blob/main/CODE_STYLE.md)
 and `.php-cs-fixer.dist.php`. Run `composer style:check`; `composer style:fix` applies the rules.
 Keep logical steps and local names readable, preserving public signatures and template output.
+
+## Boot order
+
+`extra.naf.boot.after` in `composer.json` declares the prerequisites used by this
+plugin during bootstrap. With the automatic-order framework, installed targets boot
+first; absent optional targets remain absent. Keep Composer installation requirements
+separate from boot order. No host `plugins.php` entry is needed.
